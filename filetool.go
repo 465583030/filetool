@@ -19,7 +19,7 @@ var (
 func init() {
 	runtime.GOMAXPROCS(runtime.NumCPU())
 
-	flag.IntVar(&depth, "d", 1, "tree depth")
+	flag.IntVar(&depth, "d", 2, "tree depth")
 	flag.StringVar(&sizeStr, "size", "0K", "min size of printed tree node")
 }
 
