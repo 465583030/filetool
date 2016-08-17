@@ -1,15 +1,15 @@
 package main
 
 import (
+	"fmt"
 	"os"
 	"path/filepath"
-	"fmt"
 )
 
 type treeNode struct {
 	fullPath string
 	info     os.FileInfo
-	size int64
+	size     int64
 	parent   *treeNode
 	children []*treeNode
 }
@@ -49,6 +49,9 @@ func (n *treeNode) String() string {
 func (n *treeNode) Children() []interface{} {
 	kids := make([]interface{}, len(n.children))
 	for i, c := range n.children {
+		if c.size < size {
+			continue
+		}
 		kids[i] = c
 	}
 	return kids
