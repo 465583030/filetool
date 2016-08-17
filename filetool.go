@@ -7,13 +7,22 @@ import (
 	"os"
 	"path/filepath"
 	"runtime"
+	"flag"
+)
+
+var (
+	depth int
 )
 
 func init() {
 	runtime.GOMAXPROCS(runtime.NumCPU())
+
+	flag.IntVar(&depth, "d", 1, "tree depth")
 }
 
 func main() {
+	flag.Parse()
+
 	d, err := os.Getwd()
 	if err != nil {
 		panic(err)
@@ -23,7 +32,7 @@ func main() {
 
 	walk(root)
 
-	s := printer.TreeStringDepth(root, "\n", 3)
+	s := printer.TreeStringDepth(root, "\n", depth)
 	fmt.Println(s)
 }
 
